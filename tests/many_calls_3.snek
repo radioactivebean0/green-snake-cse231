@@ -1,0 +1,5 @@
+(fun (func0) 1)
+(fun (func1 a) (add1 a))
+(fun (func2 a b) (+ a b))
+(fun (func3 a b c) (+ (add1 a) (+ b c)))
+(func1 (func3 (func0) (func2 (func0) (func0)) (func0)))

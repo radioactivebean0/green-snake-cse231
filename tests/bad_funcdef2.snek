@@ -1,0 +1,4 @@
+(fun constant
+(add1 (add1 1))
+)
+(constant 3)

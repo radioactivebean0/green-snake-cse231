@@ -1,0 +1,47 @@
+(fun (ex1)
+    ( let ( (x (vek 1 2)) ) (index x 1) )
+)
+
+(fun (func1 v)
+    ( block
+        (print v)
+        (print (index v 2))
+        (vek (index v 1) (index v 1)(index v 1))
+    )
+)
+
+(fun (ex2)
+    (func1 (vek 1 2 3))
+)
+
+(fun (mkpair x y)
+    (vek x y)
+)
+
+(fun (pairsums lst sze) 
+    (let ((i 0) (acc (vek 0 0)))
+        (loop
+            (block
+                (if (= i sze) (break acc) (+ i 0))
+                (set! acc (vek 
+                            (+ (index acc 0) (index (index lst i) 0))
+                            (+ (index acc 1) (index (index lst i) 1))
+                          )
+                )
+                (set! i (add1 i))
+            )
+        )
+    )
+)
+
+(fun (ex3)
+    (pairsums (vek (mkpair 1 2) (mkpair 1 2) (mkpair 2 1) (mkpair 4 4) (mkpair -1 -3)) 5)
+)
+
+(if (= input 1)
+    (ex1)
+    (if (= input 2)
+        (ex2)
+        (ex3)
+    )
+)

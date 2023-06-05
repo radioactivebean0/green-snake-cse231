@@ -1,0 +1,7 @@
+(fun (add2 a)
+(print (+ 2 a))
+)
+(fun (muladd a b)
+(+ (* a b) (print (* a b)))
+)
+(add2 (add2 (add2 (muladd (add2 0) (add2 0)))))

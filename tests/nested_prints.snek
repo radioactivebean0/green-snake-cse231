@@ -1,0 +1,6 @@
+(
+    let ((b (print 20))) (
+        let ((a (+ b (- 10 5)))) 
+            (print (* (add1 (print (print 1))) a))
+        )
+)

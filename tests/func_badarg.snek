@@ -1,0 +1,4 @@
+(fun (func1 let)
+(add1 let)
+)
+(func1 2)

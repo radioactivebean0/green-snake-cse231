@@ -1,0 +1,5 @@
+(fun (big n)
+(if (>= n 100)
+true false)
+)
+(big input)

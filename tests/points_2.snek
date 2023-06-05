@@ -1,0 +1,8 @@
+(fun (mkpt x y)
+(vec x y)
+)
+(fun (pointsum pt1 pt2)
+(vec (+ (vec-get pt1 0) (vec-get pt2 0)) (+ (vec-get pt1 1) (vec-get pt2 1)))
+)
+
+(pointsum (mkpt 1 2) (mkpt 2 3))

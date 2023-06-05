@@ -1,0 +1,4 @@
+(fun (add2 a)
+(+ 2 a)
+)
+(add2 (add2 (add2 2)))

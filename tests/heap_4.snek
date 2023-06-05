@@ -1,0 +1,6 @@
+(fun (func1 v)
+    ( block
+        (vec (vec-get v 1) (vec-get v 1)(vec-get v 1))
+    )
+)
+(func1 true)

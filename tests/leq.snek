@@ -1,0 +1,7 @@
+(fun (istwodig n)
+  (if (<= 10 n)
+      true
+      false
+  )
+)
+(istwodig input)

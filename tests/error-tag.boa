@@ -1,0 +1,18 @@
+(fun (func1 v)
+    ( block
+        (vek (index v 1) (index v 1)(index v 1))
+    )
+)
+
+(fun (ex1)
+    (func1 true)
+)
+
+(fun (ex2)
+    (let ((x (vek 1 2))) (index x true))
+)
+
+
+(if (= input 1)
+    (ex1)
+    (ex2))

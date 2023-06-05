@@ -1,0 +1,7 @@
+(fun (add2 n)
+  (+ n 2)
+)
+(fun (add2 n m)
+  (+ n (+ m 2))
+)
+(add2 34)

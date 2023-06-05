@@ -1,0 +1,11 @@
+(fun (func1 v)
+    ( block
+        (print (vec-get v 2))
+        (vec (vec-get v 1) (vec-get v 1) (vec-get v 1) )
+    )
+)
+(if (= input 0)    (func1 (vec 1 2 3))
+(func1 (vec 1 2))
+
+)
+

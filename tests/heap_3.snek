@@ -1,0 +1,21 @@
+(fun (mkpair x y)
+    (vec x y)
+)
+
+(fun (pairsums lst sze) 
+    (let ((i 0) (acc (vec 0 0)))
+        (loop
+            (block
+                (if (= i sze) (break acc) (+ i 0))
+                (set! acc (vec 
+                            (+ (vec-get acc 0) (vec-get (vec-get lst i) 0))
+                            (+ (vec-get acc 1) (vec-get (vec-get lst i) 1))
+                          )
+                )
+                (set! i (add1 i))
+            )
+        )
+    )
+)
+
+(pairsums (vec (mkpair 1 2) (mkpair 1 2) (mkpair 2 1) (mkpair 4 4) (mkpair -1 -3)) 5)
