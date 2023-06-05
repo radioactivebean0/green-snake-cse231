@@ -305,6 +305,84 @@ success_tests! {
         name: heap_3,
         file: "heap_3.snek",
         expected: "[7, 6]",
+    },
+    {
+        name: heap_ex1,
+        file: "simple_heapex.snek",
+        input: "1",
+        expected: "2",
+    },
+    {
+        name: heap_ex2,
+        file: "simple_heapex.snek",
+        input: "2",
+        expected: "[1, 2, 3]\n3\n[2, 2, 2]",
+    },
+    {
+        name: heap_ex3,
+        file: "simple_heapex.snek",
+        input: "3",
+        expected: "[7, 6]",
+    },
+    {
+        name: boa_points1,
+        file: "points.boa.snek",
+        input: "1",
+        expected: "[3, 5]",
+    },
+    {
+        name: boa_points2,
+        file: "points.boa.snek",
+        input: "2",
+        expected: "[4, 4]",
+    },
+    {
+        name: boa_points3,
+        file: "points.boa.snek",
+        input: "3",
+        expected: "[1, 1]\n[2, 2]\n[4, 4]",
+    },
+    {
+        name: boa_points4,
+        file: "points.boa.snek",
+        input: "4",
+        expected: "[[2, 2], [4, 4]]",
+    },
+    {
+        name: bst_1,
+        file: "bst.boa.snek",
+        input: "1",
+        expected: "[false, false, false]",
+    },
+    {
+        name: bst_2,
+        file: "bst.boa.snek",
+        input: "2",
+        expected: "[1, false, [2, false, [3, false, [4, false, false]]]]",
+    },
+    {
+        name: bst_3,
+        file: "bst.boa.snek",
+        input: "3",
+        expected: "[4, [2, [1, false, false], [3, false, false]], [6, [5, false, false], [7, false, false]]]",
+    },
+    {
+        name: bst_4,
+        file: "bst.boa.snek",
+        input: "4",
+        expected: "[4, [3, [1, false, [2, false, false]], false], [6, false, false]]\nfalse\ntrue\ntrue",
+    },
+    {
+        name: bst_5,
+        file: "bst.boa.snek",
+        input: "5",
+        expected: "[false, false, false]\n[4, false, false]\n[4, [3, false, false], false]\n[4, [3, [1, false, false], false], false]\n[4, [3, [1, false, [2, false, false]], false], false]\n[4, [3, [1, false, [2, false, false]], false], [6, false, false]]",
+    },
+    {
+        name: bst_6,
+        file: "bst.boa.snek",
+        input: "6",
+        expected: "[8, [6, [5, false, false], [7, false, false]], [10, [9, false, false], [11, false, false]]]\n[8, [6, [5, [4, false, false], false], [7, false, false]], [10, [9, false, false], [11, false, false]]]",
     }
 }
 
@@ -408,6 +486,30 @@ runtime_error_tests! {
         name: heap_5,
         file: "heap_5.snek",
         expected:" invalid argument",
+    },
+    {
+        name: error_heap_tag1,
+        file: "error-tag.boa.snek",
+        input: "1",
+        expected: "invalid argument",
+    },
+    {
+        name: error_heap_tag2,
+        file: "error-tag.boa.snek",
+        input: "2",
+        expected: "invalid argument",
+    },
+    {
+        name: error_bounds1,
+        file: "error-bounds.boa.snek",
+        input: "1",
+        expected: "bounds",
+    },
+    {
+        name: error_bounds2,
+        file: "error-bounds.boa.snek",
+        input: "2",
+        expected: "bounds",
     }
 }
 

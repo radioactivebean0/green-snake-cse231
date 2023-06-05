@@ -1,17 +1,17 @@
 (fun (emptybst)
-    (vek false false false)
+    (vec false false false)
 )
 
 (fun (insertbst root value)
     (if (isbool root) 
-        (vek value false false)
-        (if (isbool (index root 0))
-            (vek value false false)
-            (if (= value (index root 0))
+        (vec value false false)
+        (if (isbool (vec-get root 0))
+            (vec value false false)
+            (if (= value (vec-get root 0))
                 root
-                (if (< value (index root 0))
-                    (vek (index root 0) (insertbst (index root 1) value) (index root 2))
-                    (vek (index root 0) (index root 1) (insertbst (index root 2) value))
+                (if (< value (vec-get root 0))
+                    (vec (vec-get root 0) (insertbst (vec-get root 1) value) (vec-get root 2))
+                    (vec (vec-get root 0) (vec-get root 1) (insertbst (vec-get root 2) value))
                 )
             )
         )
@@ -21,13 +21,13 @@
 (fun (searchbst root value)
     (if (isbool root)
         false
-        (if (isbool (index root 0))
+        (if (isbool (vec-get root 0))
             false
-            (if (= value (index root 0))
+            (if (= value (vec-get root 0))
                 true
-                (if (< value (index root 0))
-                    (searchbst (index root 1) value)
-                    (searchbst (index root 2) value)
+                (if (< value (vec-get root 0))
+                    (searchbst (vec-get root 1) value)
+                    (searchbst (vec-get root 2) value)
                 )
             )
         )
@@ -73,7 +73,7 @@
         (block
             (set! x (insertbst (insertbst (insertbst (emptybst) 6) 5) 7))
             (set! y (insertbst (insertbst (insertbst (emptybst) 10) 9) 11))
-            (let ((z (vek 8 x y)))
+            (let ((z (vec 8 x y)))
                 (block 
                     (print z)
                     (insertbst z 4)

@@ -1,0 +1,11 @@
+(fun (ex1)
+    (print (vec-get (vec 1 2) 2))
+)
+(fun (ex2)
+    (print (vec-get (vec 1 2) -1))
+)
+
+(if (= input 1)
+    (ex1)
+    (ex2)
+)
