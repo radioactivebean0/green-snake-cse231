@@ -1,0 +1,9 @@
+(fun (range n m)
+  (if (= n m) (vec n nil) (vec n (range (add1 n) m))))
+
+(let ((list (range 1 5)))
+    (block 
+        (set! list 1)
+        (let ((l2 (range 1 5))) l2)
+    )
+)

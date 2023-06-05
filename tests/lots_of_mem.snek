@@ -1,0 +1,33 @@
+(fun (twoD x y)
+    (let ((retval (make-vec x 0)))
+        (block 
+            (let ((i 0) (j 0))
+                (loop
+                    (if (= i x)
+                        (break nil)
+                        (block
+                            (vec-set! retval i (make-vec y 0))
+                            (set! j 0)
+                            (loop
+                                (block
+                                    (if (= j y)
+                                        (break nil)
+                                        (block 
+                                            (print (vec i j))
+                                            (vec-set! retval i (vec-set! (vec-get retval i) j (+ j (* i y))))
+                                            (set! j (add1 j))
+                                        )
+                                    )
+                                )
+                            )
+                            (set! i (add1 i))
+                        )
+                    )
+                )
+            )
+            retval
+        )
+    )
+)
+
+(twoD 20 25)
