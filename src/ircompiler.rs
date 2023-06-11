@@ -399,6 +399,7 @@ impl IRSession {
                                 self.emit_instrs([ // test input is a num
                                     Instr::Test(BinArgs::ToReg(Rdi, Arg32::Imm(0b001))),
                                     Instr::Jnz(INVALID_ARG.to_string()),
+                                    Instr::Mov(MovArgs::ToReg(CHECK_REG2, Arg64::Reg(Rdi))),
                                 ]);
                                 self.compile_ir_var(var.clone(), Loc::Reg(CHECK_REG), env);
                                 self.emit_instrs([

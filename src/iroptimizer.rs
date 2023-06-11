@@ -1,6 +1,8 @@
 use std::collections::VecDeque;
+use std::env::var;
 
 use im::HashMap;
+use std::collections::HashMap as MutMap;
 
 use crate::syntax::{Symbol};
 use crate::ir::*;
@@ -16,6 +18,8 @@ pub fn optimize_ir(prog: &Prog) -> Prog {
         new_prog = dead_code_elim(&new_prog);
         (new_prog, done) = fold_constants(&new_prog);
     }
+    new_prog = propogate_constants(&new_prog);
+    print!("{}", ir_to_string(&new_prog));
     return new_prog;
 }
 
@@ -433,4 +437,160 @@ fn find_labels_block(block: &Block, curr_pts: &HashMap<Symbol, (usize, usize)>, 
         }
     }
     return b_labels;
+}
+fn is_hard_coded_reg (s: &Symbol) -> bool{
+    match s.to_string().as_str() {
+        "rax"|
+        "r15" => true,
+        _ => false,
+    }
+}
+fn propogate_constants(prog: &Prog) -> Prog {
+    return Prog {
+        defs: propogate_constants_defs(&prog.defs),
+        main: propogate_constants_block(&prog.main, &vec![])
+    }
+}
+
+fn propogate_constants_defs(defs: &[Def]) -> Vec<Def> {
+    let mut new_defs = vec![];
+    for def in defs {
+        new_defs.push(Def{name: def.name.clone(), args: def.args.clone(), body: propogate_constants_block(&def.body, &def.args)});
+    }
+    return new_defs;
+}
+
+fn propogate_constants_block(block: &Block, args: &[Symbol]) -> Block{
+    let mut var_map:MutMap<Symbol, Val> = MutMap::new();
+    let mut to_rm = vec![];
+    for step in block.steps.as_slice() {
+        match step {
+            Step::Set(x, v) => {
+                if !is_hard_coded_reg(x){
+                    match v {
+                        IRExpr::Val(val) => {
+                            match var_map.get(&x){
+                                Some(v) => if ! (*v == *val) {
+                                    to_rm.push(x.clone());
+                                    // let t = var_map.remove_entry(&x);
+                                    // println!("removed {:?}",t.unwrap());
+                                    // println!("{:?}",var_map);
+                                },
+                                None => _ = var_map.insert(x.clone(), *val),
+                            }
+                        },
+                        _ => {
+                            match var_map.get(&x){
+                                Some(_) => {
+                                    to_rm.push(x.clone());
+                                    //_ = var_map.remove_entry(&x);
+                                },
+                                None => to_rm.push(x.clone()),
+
+                            }
+                        },
+                    }
+                }
+            }
+            _ => (),
+        }
+    }
+    println!("{:?}", to_rm);
+    for s in to_rm {
+        _ = var_map.remove(&s);
+    }
+    for a in args {
+        _ = var_map.remove(&a);
+    }
+    println!("varmap: {:?}", var_map);
+    let mut new_steps = vec![];
+    for step in block.steps.as_slice() {
+        match step {
+            Step::Label(_)|
+            Step::Goto(_) => new_steps.push(step.clone()),
+            Step::If(v, l1, l2) => {
+                match v {
+                    Val::Var(x) => {
+                        match var_map.get(&x){
+                            Some(v) => new_steps.push(Step::If(v.clone(),l1.clone(),l2.clone())),
+                            None => new_steps.push(step.clone()),
+                        }
+
+                    }
+                    _ => new_steps.push(step.clone()),
+                }
+            },
+            Step::Do(e) => new_steps.push(Step::Do(propogate_constants_expr(&e, &var_map))),
+            Step::Set(x, e) => {
+                if var_map.contains_key(&x) {
+                    continue;
+                } else {
+                    new_steps.push(Step::Set(x.clone(), propogate_constants_expr(&e, &var_map)));
+                }
+            }
+            Step::Check(t) => {
+                match t {
+                    CheckType::CheckIsNum(v) => new_steps.push(Step::Check(CheckType::CheckIsNum(propogate_constants_val(&v, &var_map)))),
+                    CheckType::CheckIsVec(v) => new_steps.push(Step::Check(CheckType::CheckIsVec(propogate_constants_val(&v, &var_map)))),
+                    CheckType::CheckIsNotNil(v) => new_steps.push(Step::Check(CheckType::CheckIsNotNil(propogate_constants_val(&v, &var_map)))),
+                    CheckType::CheckEq(v1,v2) => new_steps.push(Step::Check(CheckType::CheckEq(propogate_constants_val(&v1, &var_map), propogate_constants_val(&v2, &var_map)))),
+                    CheckType::CheckBounds(v1,v2) => new_steps.push(Step::Check(CheckType::CheckBounds(propogate_constants_val(&v1, &var_map), propogate_constants_val(&v2, &var_map)))),
+                    CheckType::CheckOverflow => new_steps.push(Step::Check(CheckType::CheckOverflow)),
+                }
+            },
+        }
+    }
+    return Block{steps: new_steps};
+}
+
+fn propogate_constants_expr(expr: &IRExpr, var_map: &MutMap<Symbol, Val>) -> IRExpr {
+    match expr{
+        IRExpr::Add1(v) => IRExpr::Add1(propogate_constants_val(v, var_map)),
+        IRExpr::Sub1(v) => IRExpr::Sub1(propogate_constants_val(v, var_map)),
+        IRExpr::Plus(v1, v2) => IRExpr::Plus(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
+        IRExpr::Minus(v1, v2) => IRExpr::Minus(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
+        IRExpr::Times(v1, v2) => IRExpr::Times(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
+        IRExpr::Divide(v1, v2) => IRExpr::Divide(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
+        IRExpr::Eq(v1, v2) => IRExpr::Eq(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
+        IRExpr::Gt(v1, v2) => IRExpr::Gt(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
+        IRExpr::Ge(v1, v2) => IRExpr::Ge(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
+        IRExpr::Lt(v1, v2) => IRExpr::Lt(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
+        IRExpr::Le(v1, v2) => IRExpr::Le(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
+        IRExpr::IsNum(v) => IRExpr::IsNum(propogate_constants_val(v, var_map)),
+        IRExpr::IsBool(v) => IRExpr::IsBool(propogate_constants_val(v, var_map)),
+        IRExpr::IsVec(v) => IRExpr::IsVec(propogate_constants_val(v, var_map)),
+        IRExpr::Print(v) => IRExpr::Print(propogate_constants_val(v, var_map)),
+        IRExpr::Call(fun, args) => {
+            let mut new_args = vec![];
+            for arg in args {
+                new_args.push(propogate_constants_val(arg, var_map));
+            }
+            IRExpr::Call(fun.clone(), new_args)
+        }
+        IRExpr::MakeVec(v1, v2) => IRExpr::MakeVec(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
+        IRExpr::Vec(vs) => {
+            let mut new_v = vec![];
+            for v in vs {
+                new_v.push(propogate_constants_val(v, var_map));
+            }
+            println!("{:?}",new_v);
+            IRExpr::Vec(new_v)
+        }
+        IRExpr::VecSet(v1, v2, v3) => IRExpr::VecSet(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map), propogate_constants_val(v3, var_map)),
+        IRExpr::VecGet(v1, v2) => IRExpr::VecGet(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
+        IRExpr::VecLen(v) => IRExpr::VecLen(propogate_constants_val(v, var_map)),
+        IRExpr::Val(v) => IRExpr::Val(propogate_constants_val(v, var_map)),
+        _ => expr.clone(),
+    }
+}
+fn propogate_constants_val(val: &Val, var_map: &MutMap<Symbol, Val>) -> Val {
+    match val {
+        Val::Var(x) => { 
+            match var_map.get(&x){
+                Some(v) => v.clone(),
+                None => val.clone(),
+            }
+        },
+        _ => val.clone(),
+    }
 }

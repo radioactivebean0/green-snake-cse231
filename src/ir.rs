@@ -3,7 +3,7 @@ use crate::{
 };
 use crate::syntax::{Symbol};
 
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub enum Val {
     Num(i64),
     True,
