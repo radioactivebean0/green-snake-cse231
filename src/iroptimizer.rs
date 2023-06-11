@@ -1,5 +1,4 @@
 use std::collections::VecDeque;
-use std::env::var;
 
 use im::HashMap;
 use std::collections::HashMap as MutMap;
@@ -8,18 +7,19 @@ use crate::syntax::{Symbol};
 use crate::ir::*;
 
 pub fn optimize_ir(prog: &Prog) -> Prog {
-    let (mut new_prog, mut done) = fold_constants(prog);
-    while !done {
-        (new_prog, done) = fold_constants(&new_prog);
+    let (mut new_prog, mut fold_done) = fold_constants(prog);
+    let mut dead_done = false;
+    let mut cons_done = false;
+    (new_prog, dead_done) = dead_code_elim(&new_prog);
+    (new_prog, cons_done) = propogate_constants(&new_prog);
+
+    while !fold_done || !dead_done || !cons_done{
+        (new_prog, fold_done) = fold_constants(&new_prog);
+        (new_prog, dead_done) = dead_code_elim(&new_prog);
+        (new_prog, cons_done) = propogate_constants(&new_prog);
         //print!("{}", ir_to_string(&new_prog));
     }
-    done = false;
-    while !done {
-        new_prog = dead_code_elim(&new_prog);
-        (new_prog, done) = fold_constants(&new_prog);
-    }
-    new_prog = propogate_constants(&new_prog);
-    print!("{}", ir_to_string(&new_prog));
+    //print!("{}", ir_to_string(&new_prog));
     return new_prog;
 }
 
@@ -83,8 +83,8 @@ fn fold_constants_expr(e: &IRExpr) -> (IRExpr, bool) {
                 Val::Num(n) => {
                     let res = n.checked_add(1);
                     match res {
-                        Some(m) => (IRExpr::Val(Val::Num(m)), false),
-                        None => (e.clone(), true), // just let overflow happen and get caught for now
+                        Some(m) if m <= 4611686018427387903 => (IRExpr::Val(Val::Num(m)), false),
+                        _ => (e.clone(), true), // just let overflow happen and get caught for now
                     }
                 },
                 _ => (e.clone(), true)
@@ -95,8 +95,8 @@ fn fold_constants_expr(e: &IRExpr) -> (IRExpr, bool) {
                 Val::Num(n) => {
                     let res = n.checked_sub(1);
                     match res {
-                        Some(m) => (IRExpr::Val(Val::Num(m)), false),
-                        None => (e.clone(), true), // just let overflow happen and get caught for now
+                        Some(m) if m >= -4611686018427387904  => (IRExpr::Val(Val::Num(m)), false),
+                        _ => (e.clone(), true), // just let overflow happen and get caught for now
                     }
                 },
                 _ => (e.clone(), true)
@@ -107,8 +107,8 @@ fn fold_constants_expr(e: &IRExpr) -> (IRExpr, bool) {
                 (Val::Num(n1), Val::Num(n2)) => {
                     let res = n1.checked_add(*n2);
                     match res {
-                        Some(m) => (IRExpr::Val(Val::Num(m)), false),
-                        None => (e.clone(), true), // just let overflow happen and get caught for now
+                        Some(m) if m <= 4611686018427387903 => (IRExpr::Val(Val::Num(m)), false),
+                        _ => (e.clone(), true), // just let overflow happen and get caught for now
                     }
                 }
                 _ => (e.clone(), true)
@@ -119,8 +119,8 @@ fn fold_constants_expr(e: &IRExpr) -> (IRExpr, bool) {
                 (Val::Num(n1), Val::Num(n2)) => {
                     let res = n1.checked_sub(*n2);
                     match res {
-                        Some(m) => (IRExpr::Val(Val::Num(m)), false),
-                        None => (e.clone(), true), // just let overflow happen and get caught for now
+                        Some(m) if m >= -4611686018427387904 => (IRExpr::Val(Val::Num(m)), false),
+                        _ => (e.clone(), true), // just let overflow happen and get caught for now
                     }
                 }
                 _ => (e.clone(), true)
@@ -131,8 +131,8 @@ fn fold_constants_expr(e: &IRExpr) -> (IRExpr, bool) {
                 (Val::Num(n1), Val::Num(n2)) => {
                     let res = n1.checked_mul(*n2);
                     match res {
-                        Some(m) => (IRExpr::Val(Val::Num(m)), false),
-                        None => (e.clone(), true), // just let overflow happen and get caught for now
+                        Some(m) if m <= 4611686018427387903 => (IRExpr::Val(Val::Num(m)), false),
+                        _ => (e.clone(), true), // just let overflow happen and get caught for now
                     }
                 }
                 _ => (e.clone(), true)
@@ -235,10 +235,11 @@ fn fold_constants_expr(e: &IRExpr) -> (IRExpr, bool) {
     }
 }
 
-fn dead_code_elim(prog: &Prog) -> Prog {
+fn dead_code_elim(prog: &Prog) -> (Prog, bool) {
     let label_map = generate_label_map(prog);
     let mut to_visit = VecDeque::new(); // queue of pairs, (func, IR step) --- main is 0, defs start 1,2,...
     let mut visited:Vec<Vec<bool>> = Vec::new();
+    let mut done = true;
     visited.push(Vec::new());
     visited.last_mut().unwrap().resize(prog.main.steps.len(), false);
     for def in prog.defs.as_slice() {
@@ -370,6 +371,8 @@ fn dead_code_elim(prog: &Prog) -> Prog {
                         Some((j,k)) => {
                             if visited[*j][*k] {
                                 new_main.push(step.clone())
+                            } else {
+                                done = false;
                             }
                         }
                         None => todo!(),
@@ -394,6 +397,8 @@ fn dead_code_elim(prog: &Prog) -> Prog {
                             Some((j,k)) => {
                                 if visited[*j][*k] {
                                     new_def_steps.push(step.clone())
+                                } else {
+                                    done = false;
                                 }
                             }
                             None => todo!(),
@@ -406,7 +411,7 @@ fn dead_code_elim(prog: &Prog) -> Prog {
         new_defs.push(Def{name: def.name.clone(), args: def.args.clone(), body: Block{steps: new_def_steps}});
     }
 
-    return Prog{defs: new_defs, main: Block{steps: new_main}};
+    return (Prog{defs: new_defs, main: Block{steps: new_main}}, done);
 }
 
 fn generate_label_map(prog: &Prog) -> HashMap<Symbol, (usize,usize)> {
@@ -445,23 +450,29 @@ fn is_hard_coded_reg (s: &Symbol) -> bool{
         _ => false,
     }
 }
-fn propogate_constants(prog: &Prog) -> Prog {
-    return Prog {
-        defs: propogate_constants_defs(&prog.defs),
-        main: propogate_constants_block(&prog.main, &vec![])
-    }
+fn propogate_constants(prog: &Prog) -> (Prog, bool){
+    let (new_defs, ddone) = propogate_constants_defs(&prog.defs);
+    let (new_main, mdone) = propogate_constants_block(&prog.main, &vec![]);
+    return (Prog {
+        defs: new_defs,
+        main: new_main,
+    }, (ddone && mdone))
 }
 
-fn propogate_constants_defs(defs: &[Def]) -> Vec<Def> {
+fn propogate_constants_defs(defs: &[Def]) -> (Vec<Def>, bool) {
     let mut new_defs = vec![];
+    let mut done = true;
     for def in defs {
-        new_defs.push(Def{name: def.name.clone(), args: def.args.clone(), body: propogate_constants_block(&def.body, &def.args)});
+        let (ndef, tdone) = propogate_constants_block(&def.body, &def.args);
+        done = tdone && done;
+        new_defs.push(Def{name: def.name.clone(), args: def.args.clone(), body: ndef});
     }
-    return new_defs;
+    return (new_defs, done);
 }
 
-fn propogate_constants_block(block: &Block, args: &[Symbol]) -> Block{
+fn propogate_constants_block(block: &Block, args: &[Symbol]) -> (Block, bool){
     let mut var_map:MutMap<Symbol, Val> = MutMap::new();
+    let mut done = true;
     let mut to_rm = vec![];
     for step in block.steps.as_slice() {
         match step {
@@ -512,7 +523,10 @@ fn propogate_constants_block(block: &Block, args: &[Symbol]) -> Block{
                 match v {
                     Val::Var(x) => {
                         match var_map.get(&x){
-                            Some(v) => new_steps.push(Step::If(v.clone(),l1.clone(),l2.clone())),
+                            Some(v) => {
+                                done = false;
+                                new_steps.push(Step::If(v.clone(),l1.clone(),l2.clone()))
+                            }
                             None => new_steps.push(step.clone()),
                         }
 
@@ -520,77 +534,184 @@ fn propogate_constants_block(block: &Block, args: &[Symbol]) -> Block{
                     _ => new_steps.push(step.clone()),
                 }
             },
-            Step::Do(e) => new_steps.push(Step::Do(propogate_constants_expr(&e, &var_map))),
+            Step::Do(e) => {
+                let (new_exp, tdone) = propogate_constants_expr(&e, &var_map);
+                new_steps.push(Step::Do(new_exp));
+                done = done && tdone;
+            }
             Step::Set(x, e) => {
                 if var_map.contains_key(&x) {
+                    done = false;
                     continue;
                 } else {
-                    new_steps.push(Step::Set(x.clone(), propogate_constants_expr(&e, &var_map)));
+                    let (new_exp, tdone) = propogate_constants_expr(&e, &var_map);
+                    new_steps.push(Step::Set(x.clone(), new_exp));
+                    done = done && tdone;
                 }
             }
             Step::Check(t) => {
                 match t {
-                    CheckType::CheckIsNum(v) => new_steps.push(Step::Check(CheckType::CheckIsNum(propogate_constants_val(&v, &var_map)))),
-                    CheckType::CheckIsVec(v) => new_steps.push(Step::Check(CheckType::CheckIsVec(propogate_constants_val(&v, &var_map)))),
-                    CheckType::CheckIsNotNil(v) => new_steps.push(Step::Check(CheckType::CheckIsNotNil(propogate_constants_val(&v, &var_map)))),
-                    CheckType::CheckEq(v1,v2) => new_steps.push(Step::Check(CheckType::CheckEq(propogate_constants_val(&v1, &var_map), propogate_constants_val(&v2, &var_map)))),
-                    CheckType::CheckBounds(v1,v2) => new_steps.push(Step::Check(CheckType::CheckBounds(propogate_constants_val(&v1, &var_map), propogate_constants_val(&v2, &var_map)))),
+                    CheckType::CheckIsNum(v) => {
+                        let (new_v, tdone) = propogate_constants_val(&v, &var_map);
+                        new_steps.push(Step::Check(CheckType::CheckIsNum(new_v)));
+                        done = done && tdone;
+                    }
+                    CheckType::CheckIsVec(v) => {
+                        let (new_v, tdone) = propogate_constants_val(&v, &var_map);
+                        new_steps.push(Step::Check(CheckType::CheckIsVec(new_v)));
+                        done = done && tdone;
+                    }
+                    CheckType::CheckIsNotNil(v) => {
+                        let (new_v, tdone) = propogate_constants_val(&v, &var_map);
+                        new_steps.push(Step::Check(CheckType::CheckIsNotNil(new_v)));
+                        done = done && tdone;
+                    }
+                    CheckType::CheckEq(v1,v2) => {
+                        let (new_v1, tdone1) = propogate_constants_val(&v1, &var_map);
+                        let (new_v2, tdone2) = propogate_constants_val(&v2, &var_map);
+                        done = done && tdone1 && tdone2;
+                        new_steps.push(Step::Check(CheckType::CheckEq(new_v1,new_v2)));
+                    }
+                    CheckType::CheckBounds(v1,v2) => {
+                        let (new_v1, tdone1) = propogate_constants_val(&v1, &var_map);
+                        let (new_v2, tdone2) = propogate_constants_val(&v2, &var_map);
+                        done = done && tdone1 && tdone2;
+                        new_steps.push(Step::Check(CheckType::CheckBounds(new_v1,new_v2)));
+                    }
                     CheckType::CheckOverflow => new_steps.push(Step::Check(CheckType::CheckOverflow)),
                 }
             },
         }
     }
-    return Block{steps: new_steps};
+    return (Block{steps: new_steps}, done);
 }
 
-fn propogate_constants_expr(expr: &IRExpr, var_map: &MutMap<Symbol, Val>) -> IRExpr {
+fn propogate_constants_expr(expr: &IRExpr, var_map: &MutMap<Symbol, Val>) -> (IRExpr,bool) {
     match expr{
-        IRExpr::Add1(v) => IRExpr::Add1(propogate_constants_val(v, var_map)),
-        IRExpr::Sub1(v) => IRExpr::Sub1(propogate_constants_val(v, var_map)),
-        IRExpr::Plus(v1, v2) => IRExpr::Plus(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
-        IRExpr::Minus(v1, v2) => IRExpr::Minus(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
-        IRExpr::Times(v1, v2) => IRExpr::Times(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
-        IRExpr::Divide(v1, v2) => IRExpr::Divide(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
-        IRExpr::Eq(v1, v2) => IRExpr::Eq(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
-        IRExpr::Gt(v1, v2) => IRExpr::Gt(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
-        IRExpr::Ge(v1, v2) => IRExpr::Ge(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
-        IRExpr::Lt(v1, v2) => IRExpr::Lt(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
-        IRExpr::Le(v1, v2) => IRExpr::Le(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
-        IRExpr::IsNum(v) => IRExpr::IsNum(propogate_constants_val(v, var_map)),
-        IRExpr::IsBool(v) => IRExpr::IsBool(propogate_constants_val(v, var_map)),
-        IRExpr::IsVec(v) => IRExpr::IsVec(propogate_constants_val(v, var_map)),
-        IRExpr::Print(v) => IRExpr::Print(propogate_constants_val(v, var_map)),
+        IRExpr::Add1(v) => {
+            let (new_v, tdone) = propogate_constants_val(v, var_map);
+            (IRExpr::Add1(new_v), tdone)
+        }
+        IRExpr::Sub1(v) => {
+            let (new_v, tdone) = propogate_constants_val(v, var_map);
+            (IRExpr::Sub1(new_v), tdone)
+        }
+        IRExpr::Plus(v1, v2) => {
+            let (new_v1, tdone1) = propogate_constants_val(v1, var_map);
+            let (new_v2, tdone2) = propogate_constants_val(v2, var_map);
+            (IRExpr::Plus(new_v1,new_v2), (tdone1 && tdone2))
+        }
+        IRExpr::Minus(v1, v2) => {
+            let (new_v1, tdone1) = propogate_constants_val(v1, var_map);
+            let (new_v2, tdone2) = propogate_constants_val(v2, var_map);
+            (IRExpr::Minus(new_v1,new_v2), (tdone1 && tdone2))
+        }
+        IRExpr::Times(v1, v2) => {
+            let (new_v1, tdone1) = propogate_constants_val(v1, var_map);
+            let (new_v2, tdone2) = propogate_constants_val(v2, var_map);
+            (IRExpr::Times(new_v1,new_v2), (tdone1 && tdone2))
+        }
+        IRExpr::Divide(v1, v2) => {
+            let (new_v1, tdone1) = propogate_constants_val(v1, var_map);
+            let (new_v2, tdone2) = propogate_constants_val(v2, var_map);
+            (IRExpr::Divide(new_v1,new_v2), (tdone1 && tdone2))
+        }
+        IRExpr::Eq(v1, v2) => {
+            let (new_v1, tdone1) = propogate_constants_val(v1, var_map);
+            let (new_v2, tdone2) = propogate_constants_val(v2, var_map);
+            (IRExpr::Eq(new_v1,new_v2), (tdone1 && tdone2))
+        }
+        IRExpr::Gt(v1, v2) => {
+            let (new_v1, tdone1) = propogate_constants_val(v1, var_map);
+            let (new_v2, tdone2) = propogate_constants_val(v2, var_map);
+            (IRExpr::Gt(new_v1,new_v2), (tdone1 && tdone2))
+        }
+        IRExpr::Ge(v1, v2) => {
+            let (new_v1, tdone1) = propogate_constants_val(v1, var_map);
+            let (new_v2, tdone2) = propogate_constants_val(v2, var_map);
+            (IRExpr::Ge(new_v1,new_v2), (tdone1 && tdone2))
+        }
+        IRExpr::Lt(v1, v2) => {
+            let (new_v1, tdone1) = propogate_constants_val(v1, var_map);
+            let (new_v2, tdone2) = propogate_constants_val(v2, var_map);
+            (IRExpr::Lt(new_v1,new_v2), (tdone1 && tdone2))
+        }
+        IRExpr::Le(v1, v2) => {
+            let (new_v1, tdone1) = propogate_constants_val(v1, var_map);
+            let (new_v2, tdone2) = propogate_constants_val(v2, var_map);
+            (IRExpr::Le(new_v1,new_v2), (tdone1 && tdone2))
+        }
+        IRExpr::IsNum(v) => {
+            let (new_v, tdone) = propogate_constants_val(v, var_map);
+            (IRExpr::IsNum(new_v), tdone)
+        }
+        IRExpr::IsBool(v) => {
+            let (new_v, tdone) = propogate_constants_val(v, var_map);
+            (IRExpr::IsBool(new_v), tdone)
+        }
+        IRExpr::IsVec(v) => {
+            let (new_v, tdone) = propogate_constants_val(v, var_map);
+            (IRExpr::IsVec(new_v), tdone)
+        }
+        IRExpr::Print(v) => {
+            let (new_v, tdone) = propogate_constants_val(v, var_map);
+            (IRExpr::Print(new_v), tdone)
+        }
         IRExpr::Call(fun, args) => {
             let mut new_args = vec![];
+            let mut done = true;
             for arg in args {
-                new_args.push(propogate_constants_val(arg, var_map));
+                let (targ, tdone) = propogate_constants_val(arg, var_map);
+                new_args.push(targ);
+                done = done && tdone;
             }
-            IRExpr::Call(fun.clone(), new_args)
+            (IRExpr::Call(fun.clone(), new_args), done)
         }
-        IRExpr::MakeVec(v1, v2) => IRExpr::MakeVec(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
+        IRExpr::MakeVec(v1, v2) => {
+            let (new_v1, tdone1) = propogate_constants_val(v1, var_map);
+            let (new_v2, tdone2) = propogate_constants_val(v2, var_map);
+            (IRExpr::MakeVec(new_v1,new_v2), (tdone1 && tdone2))
+        }
         IRExpr::Vec(vs) => {
             let mut new_v = vec![];
+            let mut done = true;
             for v in vs {
-                new_v.push(propogate_constants_val(v, var_map));
+                let (tnew, tdone) = propogate_constants_val(v, var_map);
+                new_v.push(tnew);
+                done = done && tdone;
             }
-            println!("{:?}",new_v);
-            IRExpr::Vec(new_v)
+            (IRExpr::Vec(new_v), done)
         }
-        IRExpr::VecSet(v1, v2, v3) => IRExpr::VecSet(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map), propogate_constants_val(v3, var_map)),
-        IRExpr::VecGet(v1, v2) => IRExpr::VecGet(propogate_constants_val(v1, var_map), propogate_constants_val(v2, var_map)),
-        IRExpr::VecLen(v) => IRExpr::VecLen(propogate_constants_val(v, var_map)),
-        IRExpr::Val(v) => IRExpr::Val(propogate_constants_val(v, var_map)),
-        _ => expr.clone(),
+        IRExpr::VecSet(v1, v2, v3) => {
+            let (new_v1, tdone1) = propogate_constants_val(v1, var_map);
+            let (new_v2, tdone2) = propogate_constants_val(v2, var_map);
+            let (new_v3, tdone3) = propogate_constants_val(v3, var_map);
+            (IRExpr::VecSet(new_v1,new_v2,new_v3), (tdone1 && tdone2 && tdone3))
+        }
+        IRExpr::VecGet(v1, v2) => {
+            let (new_v1, tdone1) = propogate_constants_val(v1, var_map);
+            let (new_v2, tdone2) = propogate_constants_val(v2, var_map);
+            (IRExpr::VecGet(new_v1,new_v2), (tdone1 && tdone2))
+        }
+        IRExpr::VecLen(v) => {
+            let (new_v, tdone) = propogate_constants_val(v, var_map);
+            (IRExpr::VecLen(new_v), tdone)
+        }
+        IRExpr::Val(v) => {
+            let (new_v, tdone) = propogate_constants_val(v, var_map);
+            (IRExpr::Val(new_v), tdone)
+        }
+        _ => (expr.clone(),true)
     }
 }
-fn propogate_constants_val(val: &Val, var_map: &MutMap<Symbol, Val>) -> Val {
+fn propogate_constants_val(val: &Val, var_map: &MutMap<Symbol, Val>) -> (Val,bool) {
     match val {
         Val::Var(x) => { 
             match var_map.get(&x){
-                Some(v) => v.clone(),
-                None => val.clone(),
+                Some(v) => (v.clone(),false),
+                None => (val.clone(),true),
             }
         },
-        _ => val.clone(),
+        _ => (val.clone(),true),
     }
 }
