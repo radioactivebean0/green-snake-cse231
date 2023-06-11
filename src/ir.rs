@@ -94,10 +94,11 @@ fn new_label(l: &mut i32, s: &str) -> Symbol {
 
 pub fn anf_to_ir(p: &FlatProgram) -> Prog {
     let mut defs = Vec::new();
-    for def in &p.defs {
-        defs.push(anf_to_ir_def(def));
-    }
     let mut i = 0;
+
+    for def in &p.defs {
+        defs.push(anf_to_ir_def(def, &mut i));
+    }
     Prog {
         defs: defs,
         main: Block {
@@ -106,19 +107,19 @@ pub fn anf_to_ir(p: &FlatProgram) -> Prog {
     }
 }
 
-fn anf_to_ir_def(d: &FlatDefinition) -> Def {
+fn anf_to_ir_def(d: &FlatDefinition, i: &mut i32) -> Def {
     let args = d.args.clone();//vec![];
     //let mut bound_vars:HashMap<Symbol, u32> = HashMap::new();
     // for arg in d.args.clone().into_iter() {
     //     bound_vars = bound_vars.update(arg, 0);
     //     args.push(get_uniq_name(arg, 0));
     // }
-    let mut i = 0;
+    //let mut i = 0;
     return Def{
         name: d.name.clone(), 
         args: args, 
         body: Block {
-            steps: anf_to_ir_block(&d.body, &Symbol::new("rax"), &Symbol::new(""), &mut i)
+            steps: anf_to_ir_block(&d.body, &Symbol::new("rax"), &Symbol::new(""), i)
         }
     };
 }
@@ -421,6 +422,9 @@ fn def_to_string(d: &Def) -> String {
             s.push_str(&format!("{},", arg));
             idx += 1;
         }
+    }
+    if d.args.len()==0 {
+        s.push_str(&format!(") {{\n"));
     }
     s.push_str(&block_to_string(&d.body));
     s.push_str("}\n\n");

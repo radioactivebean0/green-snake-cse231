@@ -78,6 +78,21 @@ global our_code_starts_here
 ",                 instrs_to_string(&sess.instrs))
 }
 
+fn hard_coded_reg (s: &Symbol) -> bool {
+    matches!(
+        s.to_string().as_str(),
+        "rax" |
+        "r15"
+    )
+}
+fn get_hard_coded_reg (s: &Symbol) -> Reg {
+    match s.to_string().as_str() {
+        "rax"=> Rax,
+        "r15" => R15,
+        _ => panic!("unknown hard coded reg"),
+    }
+}
+
 impl IRSession {
     fn new(funs: MutableMap<Symbol, usize>) -> IRSession {
         IRSession { instrs: vec![], funs: funs, tag: 0 }
@@ -91,7 +106,7 @@ impl IRSession {
         for step in &b.steps {
             match step {
                 Step::Set(x, _) => {
-                    if !env.contains_key(x) {
+                    if !env.contains_key(x) && !hard_coded_reg(x){
                         let offset = (env.len()) as i32;
                         env.insert(x.clone(), offset + 1);
                     }
@@ -166,14 +181,19 @@ impl IRSession {
             Step::Goto(l) => self.emit_instr(Instr::Jmp(format!("{lbl}_{l}"))),
             Step::Do(e) => self.compile_ir_expr(e, env),
             Step::Set(x, e) => {
-                let offset = match env.get(x) {
-                    Some(offset) => (*offset) * 8,
-                    None => {
-                        panic!("Unbound identifier {x}")
-                    }
-                };
-                self.compile_ir_expr(e, env);
-                self.emit_instr(Instr::Mov(MovArgs::ToMem(mref![Rbp - %(offset)], Reg32::Reg(Rax))));
+                if hard_coded_reg(x){
+                    self.compile_ir_expr(e, env);
+                    self.emit_instr(Instr::Mov(MovArgs::ToReg(get_hard_coded_reg(x), Arg64::Reg(Rax))));
+                } else {
+                    let offset = match env.get(x) {
+                        Some(offset) => (*offset) * 8,
+                        None => {
+                            panic!("Unbound identifier {x}")
+                        }
+                    };
+                    self.compile_ir_expr(e, env);
+                    self.emit_instr(Instr::Mov(MovArgs::ToMem(mref![Rbp - %(offset)], Reg32::Reg(Rax))));
+                }
             }
             Step::Check(ctype) => {
                 match ctype {

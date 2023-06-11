@@ -25,4 +25,4 @@ profile:
 	cargo test -- --show-output
 
 clean:
-	rm -f tests/*.a tests/*.s tests/*.run tests/*.o tests/callgrind.out
+	rm -f tests/*.a tests/*.s tests/*.run tests/*.o tests/callgrind.out tests/*.ir tests/*.anf

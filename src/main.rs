@@ -31,7 +31,7 @@ fn main() -> io::Result<()> {
     let ir_str_prog = ir::ir_to_string(&ir_prog);
     let opt_ir_prog = iroptimizer::optimize_ir(&ir_prog);
     //print!("OPTIMIZED");
-    //let opt_ir_asm = ircompiler::compile_ir_prog(&opt_ir_prog);
+    let opt_ir_asm = ircompiler::compile_ir_prog(&opt_ir_prog);
 
     // let ir_asm = ircompiler::compile_ir_prog(&ir_prog);
     let asm = compiler::compile(&expr);
@@ -42,11 +42,11 @@ fn main() -> io::Result<()> {
     //     let mut out_file = File::create(out_name)?;
     //     out_file.write_all(ir_asm.as_bytes())?;
     // } else if &args[3] == "--opt"{
-        // let mut out_file = File::create(out_name)?;
-        // out_file.write_all(opt_ir_asm.as_bytes())?;
-    // } else {
         let mut out_file = File::create(out_name)?;
-        out_file.write_all(asm.as_bytes())?;
+        out_file.write_all(opt_ir_asm.as_bytes())?;
+    // } else {
+        // let mut out_file = File::create(out_name)?;
+        // out_file.write_all(asm.as_bytes())?;
     // }
 
     let mut ir_outfile = File::create(out_name.to_owned()+".ir")?;
