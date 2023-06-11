@@ -1,0 +1,2130 @@
+---- profile_add stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5487908
+
+Instructions in generated .s: 31
+Instructions by type in your generated assembly before linking is:
+  13 mov
+   5 push
+   5 pop
+   4 call
+   1 sub
+   1 ret
+   1 jo
+   1 add
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_add1 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5509170
+
+Instructions in generated .s: 31
+Instructions by type in your generated assembly before linking is:
+  13 mov
+   5 push
+   5 pop
+   4 call
+   1 sub
+   1 ret
+   1 jo
+   1 add
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_add_lets stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5418373
+
+Instructions in generated .s: 63
+Instructions by type in your generated assembly before linking is:
+  32 mov
+   5 push
+   5 pop
+   4 test
+   4 jne
+   4 call
+   3 jo
+   3 add
+   2 sub
+   1 ret
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_basic_input_1 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5448532
+
+Instructions in generated .s: 30
+Instructions by type in your generated assembly before linking is:
+  13 mov
+   5 push
+   5 pop
+   4 call
+   1 sub
+   1 ret
+   1 add
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_basic_input_2 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5373590
+
+Instructions in generated .s: 30
+Instructions by type in your generated assembly before linking is:
+  13 mov
+   5 push
+   5 pop
+   4 call
+   1 sub
+   1 ret
+   1 add
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_binding stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5366314
+
+Instructions in generated .s: 32
+Instructions by type in your generated assembly before linking is:
+  15 mov
+   5 push
+   5 pop
+   4 call
+   1 sub
+   1 ret
+   1 add
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_boa_points1 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5470607
+
+Instructions in generated .s: 460
+Instructions by type in your generated assembly before linking is:
+ 216 mov
+  53 push
+  32 call
+  28 add
+  21 cmp
+  15 test
+  14 00
+  11 sub
+  11 jne
+  11 je
+   9 lea
+   9 jmp
+   7 pop
+   7 jle
+   4 sar
+   4 jl
+   3 ret
+   3 cmove
+   2 jo
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_boa_points2 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5437003
+
+Instructions in generated .s: 460
+Instructions by type in your generated assembly before linking is:
+ 216 mov
+  53 push
+  32 call
+  28 add
+  21 cmp
+  15 test
+  14 00
+  11 sub
+  11 jne
+  11 je
+   9 lea
+   9 jmp
+   7 pop
+   7 jle
+   4 sar
+   4 jl
+   3 ret
+   3 cmove
+   2 jo
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_boa_points3 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5514180
+
+Instructions in generated .s: 460
+Instructions by type in your generated assembly before linking is:
+ 216 mov
+  53 push
+  32 call
+  28 add
+  21 cmp
+  15 test
+  14 00
+  11 sub
+  11 jne
+  11 je
+   9 lea
+   9 jmp
+   7 pop
+   7 jle
+   4 sar
+   4 jl
+   3 ret
+   3 cmove
+   2 jo
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_boa_points4 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5465689
+
+Instructions in generated .s: 460
+Instructions by type in your generated assembly before linking is:
+ 216 mov
+  53 push
+  32 call
+  28 add
+  21 cmp
+  15 test
+  14 00
+  11 sub
+  11 jne
+  11 je
+   9 lea
+   9 jmp
+   7 pop
+   7 jle
+   4 sar
+   4 jl
+   3 ret
+   3 cmove
+   2 jo
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_bool_eq stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5411514
+
+Instructions in generated .s: 30
+Instructions by type in your generated assembly before linking is:
+  13 mov
+   5 push
+   5 pop
+   4 call
+   1 sub
+   1 ret
+   1 add
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_bst_1 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5571516
+
+Instructions in generated .s: 1131
+Instructions by type in your generated assembly before linking is:
+ 553 mov
+  82 push
+  74 cmp
+  66 call
+  57 add
+  43 je
+  41 test
+  39 jmp
+  38 sub
+  25 jne
+  20 jle
+  18 lea
+  14 sar
+  14 pop
+  14 jl
+  11 cmove
+  10 ret
+   4 and
+   2 xor
+   2 or
+   2 cmovl
+   2 00
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_bst_2 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5577581
+
+Instructions in generated .s: 1131
+Instructions by type in your generated assembly before linking is:
+ 553 mov
+  82 push
+  74 cmp
+  66 call
+  57 add
+  43 je
+  41 test
+  39 jmp
+  38 sub
+  25 jne
+  20 jle
+  18 lea
+  14 sar
+  14 pop
+  14 jl
+  11 cmove
+  10 ret
+   4 and
+   2 xor
+   2 or
+   2 cmovl
+   2 00
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_bst_3 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5564254
+
+Instructions in generated .s: 1131
+Instructions by type in your generated assembly before linking is:
+ 553 mov
+  82 push
+  74 cmp
+  66 call
+  57 add
+  43 je
+  41 test
+  39 jmp
+  38 sub
+  25 jne
+  20 jle
+  18 lea
+  14 sar
+  14 pop
+  14 jl
+  11 cmove
+  10 ret
+   4 and
+   2 xor
+   2 or
+   2 cmovl
+   2 00
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_bst_4 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5552928
+
+Instructions in generated .s: 1131
+Instructions by type in your generated assembly before linking is:
+ 553 mov
+  82 push
+  74 cmp
+  66 call
+  57 add
+  43 je
+  41 test
+  39 jmp
+  38 sub
+  25 jne
+  20 jle
+  18 lea
+  14 sar
+  14 pop
+  14 jl
+  11 cmove
+  10 ret
+   4 and
+   2 xor
+   2 or
+   2 cmovl
+   2 00
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_bst_5 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5766757
+
+Instructions in generated .s: 1131
+Instructions by type in your generated assembly before linking is:
+ 553 mov
+  82 push
+  74 cmp
+  66 call
+  57 add
+  43 je
+  41 test
+  39 jmp
+  38 sub
+  25 jne
+  20 jle
+  18 lea
+  14 sar
+  14 pop
+  14 jl
+  11 cmove
+  10 ret
+   4 and
+   2 xor
+   2 or
+   2 cmovl
+   2 00
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_bst_6 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5756963
+
+Instructions in generated .s: 1131
+Instructions by type in your generated assembly before linking is:
+ 553 mov
+  82 push
+  74 cmp
+  66 call
+  57 add
+  43 je
+  41 test
+  39 jmp
+  38 sub
+  25 jne
+  20 jle
+  18 lea
+  14 sar
+  14 pop
+  14 jl
+  11 cmove
+  10 ret
+   4 and
+   2 xor
+   2 or
+   2 cmovl
+   2 00
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_chain_bindings stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5503941
+
+Instructions in generated .s: 84
+Instructions by type in your generated assembly before linking is:
+  39 mov
+   8 test
+   8 jne
+   5 push
+   5 pop
+   4 sar
+   4 jo
+   4 imul
+   4 call
+   1 sub
+   1 ret
+   1 add
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_even_odd_1 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5423412
+
+Instructions in generated .s: 161
+Instructions by type in your generated assembly before linking is:
+  77 mov
+  15 push
+  10 call
+   9 jmp
+   7 pop
+   7 add
+   6 test
+   6 sub
+   6 jne
+   6 cmp
+   3 ret
+   3 jo
+   3 je
+   2 cmove
+   1 cmovl
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_even_odd_2 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5393580
+
+Instructions in generated .s: 161
+Instructions by type in your generated assembly before linking is:
+  77 mov
+  15 push
+  10 call
+   9 jmp
+   7 pop
+   7 add
+   6 test
+   6 sub
+   6 jne
+   6 cmp
+   3 ret
+   3 jo
+   3 je
+   2 cmove
+   1 cmovl
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_fac stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5468446
+
+Instructions in generated .s: 90
+Instructions by type in your generated assembly before linking is:
+  49 mov
+   5 test
+   5 push
+   5 pop
+   5 jne
+   5 jmp
+   4 call
+   2 jo
+   2 cmp
+   2 add
+   1 sub
+   1 sar
+   1 ret
+   1 je
+   1 imul
+   1 cmovg
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_fact stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5426894
+
+Instructions in generated .s: 104
+Instructions by type in your generated assembly before linking is:
+  54 mov
+   8 push
+   6 pop
+   5 test
+   5 jne
+   5 jmp
+   5 call
+   4 add
+   2 sub
+   2 ret
+   2 jo
+   2 cmp
+   1 sar
+   1 je
+   1 imul
+   1 cmovg
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_false_val stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5415779
+
+Instructions in generated .s: 30
+Instructions by type in your generated assembly before linking is:
+  13 mov
+   5 push
+   5 pop
+   4 call
+   1 sub
+   1 ret
+   1 add
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_func_args_0 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5458373
+
+Instructions in generated .s: 615
+Instructions by type in your generated assembly before linking is:
+ 311 mov
+  51 test
+  51 jne
+  45 push
+  35 add
+  24 jo
+  21 jmp
+  15 sub
+  14 cmp
+  13 pop
+  12 call
+   9 ret
+   7 je
+   7 cmove
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_func_args_1 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5443578
+
+Instructions in generated .s: 615
+Instructions by type in your generated assembly before linking is:
+ 311 mov
+  51 test
+  51 jne
+  45 push
+  35 add
+  24 jo
+  21 jmp
+  15 sub
+  14 cmp
+  13 pop
+  12 call
+   9 ret
+   7 je
+   7 cmove
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_func_args_2 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5370568
+
+Instructions in generated .s: 615
+Instructions by type in your generated assembly before linking is:
+ 311 mov
+  51 test
+  51 jne
+  45 push
+  35 add
+  24 jo
+  21 jmp
+  15 sub
+  14 cmp
+  13 pop
+  12 call
+   9 ret
+   7 je
+   7 cmove
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_func_args_3 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5366688
+
+Instructions in generated .s: 615
+Instructions by type in your generated assembly before linking is:
+ 311 mov
+  51 test
+  51 jne
+  45 push
+  35 add
+  24 jo
+  21 jmp
+  15 sub
+  14 cmp
+  13 pop
+  12 call
+   9 ret
+   7 je
+   7 cmove
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_func_args_4 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5368477
+
+Instructions in generated .s: 615
+Instructions by type in your generated assembly before linking is:
+ 311 mov
+  51 test
+  51 jne
+  45 push
+  35 add
+  24 jo
+  21 jmp
+  15 sub
+  14 cmp
+  13 pop
+  12 call
+   9 ret
+   7 je
+   7 cmove
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_func_args_5 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5429562
+
+Instructions in generated .s: 615
+Instructions by type in your generated assembly before linking is:
+ 311 mov
+  51 test
+  51 jne
+  45 push
+  35 add
+  24 jo
+  21 jmp
+  15 sub
+  14 cmp
+  13 pop
+  12 call
+   9 ret
+   7 je
+   7 cmove
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_func_args_6 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5346605
+
+Instructions in generated .s: 615
+Instructions by type in your generated assembly before linking is:
+ 311 mov
+  51 test
+  51 jne
+  45 push
+  35 add
+  24 jo
+  21 jmp
+  15 sub
+  14 cmp
+  13 pop
+  12 call
+   9 ret
+   7 je
+   7 cmove
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_func_args_7 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5436821
+
+Instructions in generated .s: 615
+Instructions by type in your generated assembly before linking is:
+ 311 mov
+  51 test
+  51 jne
+  45 push
+  35 add
+  24 jo
+  21 jmp
+  15 sub
+  14 cmp
+  13 pop
+  12 call
+   9 ret
+   7 je
+   7 cmove
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_geq_1 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5390442
+
+Instructions in generated .s: 66
+Instructions by type in your generated assembly before linking is:
+  31 mov
+   8 push
+   6 pop
+   5 call
+   3 jmp
+   3 add
+   2 sub
+   2 ret
+   2 cmp
+   1 test
+   1 jne
+   1 je
+   1 cmovge
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_bigloop stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 2710698770
+
+Instructions in generated .s: 64
+Instructions by type in your generated assembly before linking is:
+  32 mov
+   5 push
+   5 pop
+   5 jmp
+   4 call
+   2 test
+   2 sub
+   2 jne
+   2 cmp
+   1 ret
+   1 jo
+   1 je
+   1 cmove
+   1 add
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.58
+2 0.60
+3 0.60
+4 0.60
+5 0.61
+
+
+---- profile_geq_2 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5500465
+
+Instructions in generated .s: 66
+Instructions by type in your generated assembly before linking is:
+  31 mov
+   8 push
+   6 pop
+   5 call
+   3 jmp
+   3 add
+   2 sub
+   2 ret
+   2 cmp
+   1 test
+   1 jne
+   1 je
+   1 cmovge
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_heap_1 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5385505
+
+Instructions in generated .s: 66
+Instructions by type in your generated assembly before linking is:
+  30 mov
+   5 push
+   5 pop
+   5 call
+   4 cmp
+   3 sub
+   3 lea
+   2 test
+   2 jle
+   2 je
+   1 sar
+   1 ret
+   1 jne
+   1 jl
+   1 add
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_heap_2 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5486213
+
+Instructions in generated .s: 214
+Instructions by type in your generated assembly before linking is:
+ 104 mov
+  17 cmp
+  10 sub
+  10 push
+  10 call
+   9 test
+   9 lea
+   9 je
+   7 jle
+   6 pop
+   5 jne
+   4 sar
+   4 jl
+   4 add
+   3 jmp
+   2 ret
+   1 cmove
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_heap_3 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5458225
+
+Instructions in generated .s: 382
+Instructions by type in your generated assembly before linking is:
+ 188 mov
+  24 cmp
+  22 test
+  19 push
+  15 sub
+  15 jne
+  14 je
+  14 call
+  13 add
+  12 lea
+  10 jle
+   8 sar
+   7 pop
+   6 jl
+   5 jmp
+   4 jo
+   3 ret
+   1 xor
+   1 or
+   1 cmove
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_heap_ex1 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5373476
+
+Instructions in generated .s: 635
+Instructions by type in your generated assembly before linking is:
+ 308 mov
+  46 cmp
+  34 test
+  29 sub
+  26 je
+  25 push
+  23 call
+  22 jne
+  21 lea
+  21 add
+  18 jle
+  13 sar
+  11 pop
+  11 jmp
+  11 jl
+   7 ret
+   4 jo
+   3 cmove
+   1 xor
+   1 or
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_heap_ex2 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5572850
+
+Instructions in generated .s: 635
+Instructions by type in your generated assembly before linking is:
+ 308 mov
+  46 cmp
+  34 test
+  29 sub
+  26 je
+  25 push
+  23 call
+  22 jne
+  21 lea
+  21 add
+  18 jle
+  13 sar
+  11 pop
+  11 jmp
+  11 jl
+   7 ret
+   4 jo
+   3 cmove
+   1 xor
+   1 or
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_heap_ex3 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5508468
+
+Instructions in generated .s: 635
+Instructions by type in your generated assembly before linking is:
+ 308 mov
+  46 cmp
+  34 test
+  29 sub
+  26 je
+  25 push
+  23 call
+  22 jne
+  21 lea
+  21 add
+  18 jle
+  13 sar
+  11 pop
+  11 jmp
+  11 jl
+   7 ret
+   4 jo
+   3 cmove
+   1 xor
+   1 or
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_if_expr stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5493205
+
+Instructions in generated .s: 161
+Instructions by type in your generated assembly before linking is:
+  85 mov
+  14 test
+  14 jne
+  13 jo
+   5 push
+   5 pop
+   5 add
+   4 sub
+   4 call
+   3 jmp
+   2 sar
+   2 imul
+   2 cmp
+   1 ret
+   1 je
+   1 cmove
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_input_compare_1 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5366112
+
+Instructions in generated .s: 52
+Instructions by type in your generated assembly before linking is:
+  26 mov
+   5 push
+   5 pop
+   4 call
+   3 jmp
+   2 cmp
+   1 test
+   1 sub
+   1 ret
+   1 jne
+   1 je
+   1 cmovg
+   1 add
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_input_compare_2 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5403826
+
+Instructions in generated .s: 52
+Instructions by type in your generated assembly before linking is:
+  26 mov
+   5 push
+   5 pop
+   4 call
+   3 jmp
+   2 cmp
+   1 test
+   1 sub
+   1 ret
+   1 jne
+   1 je
+   1 cmovg
+   1 add
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_isbool_1 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5415345
+
+Instructions in generated .s: 37
+Instructions by type in your generated assembly before linking is:
+  17 mov
+   5 push
+   5 pop
+   4 call
+   1 sub
+   1 ret
+   1 cmp
+   1 cmove
+   1 and
+   1 add
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_isbool_2 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5423141
+
+Instructions in generated .s: 37
+Instructions by type in your generated assembly before linking is:
+  17 mov
+   5 push
+   5 pop
+   4 call
+   1 sub
+   1 ret
+   1 cmp
+   1 cmove
+   1 and
+   1 add
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_isnum_1 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5347772
+
+Instructions in generated .s: 36
+Instructions by type in your generated assembly before linking is:
+  17 mov
+   5 push
+   5 pop
+   4 call
+   1 sub
+   1 ret
+   1 cmove
+   1 and
+   1 add
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_isnum_2 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5426289
+
+Instructions in generated .s: 36
+Instructions by type in your generated assembly before linking is:
+  17 mov
+   5 push
+   5 pop
+   4 call
+   1 sub
+   1 ret
+   1 cmove
+   1 and
+   1 add
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_leq_2 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5369655
+
+Instructions in generated .s: 66
+Instructions by type in your generated assembly before linking is:
+  31 mov
+   8 push
+   6 pop
+   5 call
+   3 jmp
+   3 add
+   2 sub
+   2 ret
+   2 cmp
+   1 test
+   1 jne
+   1 je
+   1 cmovle
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_leq_1 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5375692
+
+Instructions in generated .s: 66
+Instructions by type in your generated assembly before linking is:
+  31 mov
+   8 push
+   6 pop
+   5 call
+   3 jmp
+   3 add
+   2 sub
+   2 ret
+   2 cmp
+   1 test
+   1 jne
+   1 je
+   1 cmovle
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_linked_list_manipulations stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5548922
+
+Instructions in generated .s: 453
+Instructions by type in your generated assembly before linking is:
+ 223 mov
+  30 cmp
+  25 push
+  21 test
+  20 je
+  17 sub
+  17 call
+  14 jmp
+  14 add
+  12 lea
+  11 jne
+  10 jle
+   9 pop
+   6 sar
+   6 jl
+   5 ret
+   4 xor
+   4 or
+   4 cmove
+   1 jo
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_make_vec_succ stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5464266
+
+Instructions in generated .s: 59
+Instructions by type in your generated assembly before linking is:
+  27 mov
+   5 push
+   5 pop
+   5 call
+   4 lea
+   2 sar
+   2 cmp
+   2 add
+   1 test
+   1 sub
+   1 ret
+   1 rep
+   1 jne
+   1 jle
+   1 jl
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_many_binding stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5480084
+
+Instructions in generated .s: 51
+Instructions by type in your generated assembly before linking is:
+  28 mov
+   5 push
+   5 pop
+   4 call
+   2 test
+   2 jne
+   2 add
+   1 sub
+   1 ret
+   1 jo
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_many_binding2 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5415836
+
+Instructions in generated .s: 88
+Instructions by type in your generated assembly before linking is:
+  47 mov
+   8 test
+   8 jne
+   5 push
+   5 pop
+   4 jo
+   4 call
+   3 sub
+   3 add
+   1 ret
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_many_calls_1 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5455559
+
+Instructions in generated .s: 64
+Instructions by type in your generated assembly before linking is:
+  26 mov
+  12 push
+   7 call
+   6 pop
+   6 add
+   2 sub
+   2 ret
+   1 test
+   1 jo
+   1 jne
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_many_calls_2 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5398483
+
+Instructions in generated .s: 132
+Instructions by type in your generated assembly before linking is:
+  57 mov
+  19 push
+  11 add
+  10 call
+   7 test
+   7 pop
+   7 jne
+   4 jo
+   3 sub
+   3 ret
+   2 sar
+   2 imul
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_many_calls_3 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5397687
+
+Instructions in generated .s: 156
+Instructions by type in your generated assembly before linking is:
+  71 mov
+  17 push
+  17 add
+  11 call
+   9 pop
+   8 test
+   8 jne
+   5 sub
+   5 ret
+   5 jo
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_nested_arith stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5367403
+
+Instructions in generated .s: 39
+Instructions by type in your generated assembly before linking is:
+  17 mov
+   5 push
+   5 pop
+   4 call
+   2 jo
+   2 add
+   1 test
+   1 sub
+   1 ret
+   1 jne
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_nested_arith2 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5391642
+
+Instructions in generated .s: 56
+Instructions by type in your generated assembly before linking is:
+  26 mov
+   5 push
+   5 pop
+   4 jo
+   4 call
+   3 test
+   3 jne
+   2 add
+   1 sub
+   1 sar
+   1 ret
+   1 imul
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_nested_arith3 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5395564
+
+Instructions in generated .s: 80
+Instructions by type in your generated assembly before linking is:
+  40 mov
+   7 jo
+   6 test
+   6 jne
+   5 push
+   5 pop
+   4 call
+   2 sub
+   2 add
+   1 sar
+   1 ret
+   1 imul
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_nested_binding stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5381566
+
+Instructions in generated .s: 66
+Instructions by type in your generated assembly before linking is:
+  37 mov
+   5 push
+   5 pop
+   4 test
+   4 jne
+   4 call
+   3 add
+   2 jo
+   1 sub
+   1 ret
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_nested_lets stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5430379
+
+Instructions in generated .s: 63
+Instructions by type in your generated assembly before linking is:
+  31 mov
+   5 push
+   5 pop
+   4 test
+   4 jo
+   4 jne
+   4 call
+   2 add
+   1 sub
+   1 sar
+   1 ret
+   1 imul
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_nested_prints stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5449975
+
+Instructions in generated .s: 83
+Instructions by type in your generated assembly before linking is:
+  44 mov
+   8 call
+   5 test
+   5 push
+   5 pop
+   5 jne
+   4 jo
+   3 add
+   1 sub
+   1 sar
+   1 ret
+   1 imul
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_nested_reused_binding stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5488904
+
+Instructions in generated .s: 79
+Instructions by type in your generated assembly before linking is:
+  44 mov
+   6 test
+   6 jne
+   5 push
+   5 pop
+   4 call
+   4 add
+   3 jo
+   1 sub
+   1 ret
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_points_2 stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5479319
+
+Instructions in generated .s: 213
+Instructions by type in your generated assembly before linking is:
+  98 mov
+  14 cmp
+  13 push
+  12 test
+  11 sub
+   9 call
+   8 jne
+   8 je
+   8 add
+   7 pop
+   6 lea
+   6 jle
+   4 sar
+   4 jl
+   3 ret
+   2 jo
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_print_funcs stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5520050
+
+Instructions in generated .s: 142
+Instructions by type in your generated assembly before linking is:
+  65 mov
+  19 push
+  12 call
+  11 add
+   7 test
+   7 pop
+   7 jne
+   4 jo
+   3 sub
+   3 ret
+   2 sar
+   2 imul
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_range_forced_gc stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5502106
+
+Instructions in generated .s: 139
+Instructions by type in your generated assembly before linking is:
+  76 mov
+  12 push
+   9 call
+   6 pop
+   6 lea
+   6 add
+   4 cmp
+   3 test
+   3 jmp
+   2 sub
+   2 ret
+   2 jne
+   2 jle
+   2 je
+   1 xor
+   1 or
+   1 jo
+   1 cmove
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_shadow_binding stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5397212
+
+Instructions in generated .s: 66
+Instructions by type in your generated assembly before linking is:
+  37 mov
+   5 push
+   5 pop
+   4 test
+   4 jne
+   4 call
+   3 add
+   2 jo
+   1 sub
+   1 ret
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_vec_get_succ stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5502299
+
+Instructions in generated .s: 78
+Instructions by type in your generated assembly before linking is:
+  39 mov
+   5 push
+   5 pop
+   5 call
+   4 cmp
+   3 test
+   3 sub
+   3 lea
+   2 sar
+   2 jne
+   2 jle
+   2 je
+   1 ret
+   1 jl
+   1 add
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00
+
+
+---- profile_vec_succ stdout ----
+valgrind is only available on Linux. Using usr/bin/time to gauge instructions instead (use it only for relative comparisons on your system)
+Instructions executed: 5466091
+
+Instructions in generated .s: 51
+Instructions by type in your generated assembly before linking is:
+  28 mov
+   5 push
+   5 pop
+   5 call
+   3 lea
+   1 sub
+   1 ret
+   1 jle
+   1 cmp
+   1 add
+
+
+perf is only available on Linux. Using usr/bin/time instead.
+Time taken in ms (seconds on MacOS):
+1 0.00
+2 0.00
+3 0.00
+4 0.00
+5 0.00

@@ -325,7 +325,7 @@ impl IRSession {
                         match (v1, v2) {
                             (_, Val::False) |
                             (_, Val::True) |
-                            (_, Val::Nil) => self.emit_instr(Instr::Jmp(INVALID_SIZE.to_string())),
+                            (_, Val::Nil) => self.emit_instr(Instr::Jmp(INVALID_ARG.to_string())),
                             (Val::Num(_), _) |
                             (Val::True, _) |
                             (Val::False, _) |
@@ -1054,21 +1054,21 @@ fn raise_wrong_number_of_args(fun: Symbol, expected: usize, got: usize) {
     panic!("function {fun} takes {expected} arguments but {got} were supplied")
 }
 
-fn calc_env(b : &Block) -> MutableMap<Symbol, i32> {
-    let mut env = MutableMap::new();
-    for step in &b.steps {
-        match step {
-            Step::Set(x, _) => {
-                if !env.contains_key(x) {
-                    let offset = env.len() as i32;
-                    env.insert(x.clone(), offset + 1);
-                }
-            }
-            _ => {}
-        }
-    }
-    env
-}
+// fn calc_env(b : &Block) -> MutableMap<Symbol, i32> {
+//     let mut env = MutableMap::new();
+//     for step in &b.steps {
+//         match step {
+//             Step::Set(x, _) => {
+//                 if !env.contains_key(x) {
+//                     let offset = env.len() as i32;
+//                     env.insert(x.clone(), offset + 1);
+//                 }
+//             }
+//             _ => {}
+//         }
+//     }
+//     env
+// }
 fn locals(start: u32, count: u32) -> impl Iterator<Item = MemRef> {
     (start..start + count).map(|i| mref![Rbp - %(8 * (i + 1))])
 }
