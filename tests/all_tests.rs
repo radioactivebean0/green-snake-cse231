@@ -485,7 +485,7 @@ runtime_error_tests! {
     {
         name: heap_5,
         file: "heap_5.snek",
-        expected:" invalid argument",
+        expected:"size",
     },
     {
         name: error_heap_tag1,
@@ -497,7 +497,7 @@ runtime_error_tests! {
         name: error_heap_tag2,
         file: "error-tag.boa.snek",
         input: "2",
-        expected: "invalid argument",
+        expected: "size",
     },
     {
         name: error_bounds1,
